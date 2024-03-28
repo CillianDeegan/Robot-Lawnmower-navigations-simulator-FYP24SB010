@@ -7,7 +7,6 @@ public class metricsPanel extends JPanel {
     private JLabel virtualTimeElapsedLabel;
     private JLabel lawnmowerNameLabel;
     private JLabel lawnmowersXAndY;
-    private JLabel lawnmowersDirection;
 
     public metricsPanel() {
         initializeComponents();
@@ -20,7 +19,7 @@ public class metricsPanel extends JPanel {
         coverageLabel = new JLabel("Coverage: ");
         virtualTimeElapsedLabel = new JLabel("Virtual Time Elapsed: ");
         lawnmowersXAndY = new JLabel("Mowers X: \nMowers Y: ");
-        lawnmowersDirection= new JLabel("Direction of movement: ");
+        //lawnmowersDirection= new JLabel("Direction of movement: ");
     }
 
     private void setupLayout() {

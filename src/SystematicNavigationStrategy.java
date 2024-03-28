@@ -1,7 +1,6 @@
 import java.util.Random;
 public class SystematicNavigationStrategy implements NavigationStrategy {
     //Random random = new Random();
-    Lawnmower.MovementDirection direction;
 
     @Override
     public String getName() {

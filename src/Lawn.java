@@ -8,13 +8,11 @@ public class Lawn {
 
     private int height;
     private int width;
-   // private int gridScaler;
+   // private int gridScaler; //original idea was to increase resolution by multiplying by scale, caused complications
     private int[][] grid; //lawn
     private int gridWidth;
     private int gridHeight;
-    private boolean[][] mowedAreas;
     private int numberOfUncutcells;
-   // private int numberOfCutcells;
 
     public Lawn() {
         this.width = 50;
@@ -23,7 +21,6 @@ public class Lawn {
         this.gridWidth = width; //*gridScaler; //2000
         this.gridHeight = height; //*gridScaler;
         this.grid = new int[gridWidth][gridHeight]; // Initialize grid with default values (false) 2000,2000
-        this.mowedAreas = new boolean[width][height]; // *grid scalar
 
         for (int i = 0; i < gridHeight; i++) {
             for (int j = 0; j < gridWidth; j++) {
@@ -31,9 +28,9 @@ public class Lawn {
             }
         }
 
-        addWire(0,0,2,height);
 
 
+//uncomment to add obstacle
 //        addWire(9,19,12,1);//top of obstacle
 //       addObstacle(10,20,10,10);//ob 1 big
 //        addWire(9,20,1,11);//left side obstacle
@@ -41,8 +38,9 @@ public class Lawn {
 //        addWire(20,20,1,10); //right side
 //
 
-        addWire(48,0,2,height);//198
-       // addWire(198,90,2,109);
+        // guide-wire on perimeter of lawn
+        addWire(0,0,2,height);
+        addWire(48,0,2,height);
         addWire(0,48,width,2);
         addWire(0,0,width,2);
 //        System.out.println(grid[1][5]);
@@ -51,8 +49,9 @@ public class Lawn {
 //        System.out.println(grid[0][1]);
 //        System.out.println(grid[28][1]);
 //        System.out.println(grid[40][1]);
-//        System.out.println(grid[11][1]);
-        //System.out.println(grid[200][147]);
+//        System.out.println(grid[11][1]); //used for debugging
+
+        //retireves number of uncut cells, essentially the actual area of the lawn  =2116
         for (int i = 0; i < gridHeight; i++) {
             for (int j = 0; j < gridWidth; j++) {
                 if(grid[i][j] == UNCUT_CELL)
@@ -94,13 +93,7 @@ public class Lawn {
     public int getGridHeight() {
         return gridHeight;
     }
-//    public int getGridScaler() {
-//        return gridScaler;
-//    }
 
-    public boolean isMowed(int x, int y) {
-        return mowedAreas[x][y];
-    }
 
     public void markMowed(int x, int y) {
 
@@ -117,10 +110,10 @@ public class Lawn {
 
 
     public void addObstacle(int x, int y, int width, int height) {
-        int arrayX = x; //* gridScaler;
-        int arrayY = y; //* gridScaler;
-        int arrayWidth = width; //* gridScaler;
-        int arrayHeight = height; //* gridScaler;
+        int arrayX = x;
+        int arrayY = y;
+        int arrayWidth = width;
+        int arrayHeight = height;
         // Mark the corresponding cells in the grid array as obstacles
         for (int i = arrayX; i < arrayX + arrayWidth; i++) {
             for (int j = arrayY; j < arrayY + arrayHeight; j++) {
@@ -128,7 +121,20 @@ public class Lawn {
             }
         }
     }
-//    public void addElevation(int x, int y, int width, int height) {
+    public void addWire(int x, int y, int width, int height) {
+        int arrayX = x;
+        int arrayY = y;
+        int arrayWidth = width;
+        int arrayHeight = height;
+        // Mark the corresponding cells in the grid array as guide wire
+        for (int i = arrayX; i < arrayX + arrayWidth; i++) {
+            for (int j = arrayY; j < arrayY + arrayHeight; j++) {
+
+                grid[i][j] = GUIDE_WIRE_CELL; //2
+            }
+        }
+    }
+//    public void addElevation(int x, int y, int width, int height) {  // was planning on using elevation , didn't get to finish
 //        int arrayX = x; //* gridScaler;
 //        int arrayY = y; //* gridScaler;
 //        int arrayWidth = width; //* gridScaler;
@@ -140,18 +146,6 @@ public class Lawn {
 //            }
 //        }
 //    }
-    public void addWire(int x, int y, int width, int height) {
-        int arrayX = x; //* gridScaler;
-        int arrayY = y; //* gridScaler;
-        int arrayWidth = width; //* gridScaler;
-        int arrayHeight = height; //* gridScaler;
-        // Mark the corresponding cells in the grid array as obstacles
-        for (int i = arrayX; i < arrayX + arrayWidth; i++) {
-            for (int j = arrayY; j < arrayY + arrayHeight; j++) {
 
-                grid[i][j] = GUIDE_WIRE_CELL; //2
-            }
-        }
-    }
 
 }

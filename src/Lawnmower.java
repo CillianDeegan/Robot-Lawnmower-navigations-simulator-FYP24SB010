@@ -2,7 +2,7 @@ public class Lawnmower {
     private String name;
     private double x; // Current x-coordinate
     private double y; // Current y-coordinate
-    private double angle; // Angle in radians, for rotation
+    private double angle; // Angle  for rotation
 //    private int chargingTime; // charging time in minutes
 //    private int chargeDuration; //how long mower last on a charge
 
@@ -10,7 +10,6 @@ public class Lawnmower {
     private int orientation; // Current orientation (0 - North, 1 - East, 2 - South, 3 - West)
 
     private Lawn lawn;
-    private simulationPanel lawnpanel;
     private NavigationStrategy navigationStrategy;
 
 
@@ -55,45 +54,6 @@ public class Lawnmower {
 
     public void setSpeed(double speed){this.speed = speed;}
 
-//    public void setChargingTime(int chargeTime){
-//        this.chargingTime = chargeTime;
-//    }
-//    public int getChargingTime(){
-//        return this.chargingTime ;
-//    }
-//    public void setChargeDuration(int chargeDuration){
-//        this.chargeDuration = chargeDuration;
-//    }
-//    public int getChargeDuration(){
-//        return this.chargeDuration ;
-//    }
-
-    public enum MovementDirection {
-        UP, DOWN, LEFT, RIGHT, UP_RIGHT, UP_LEFT, DOWN_RIGHT, DOWN_LEFT
-    }
-
-    public MovementDirection getMovementDirection(double oldX, double oldY, double newX, double newY) {
-        if (newX > oldX && newY > oldY) {
-            return MovementDirection.DOWN_RIGHT;
-        } else if (newX > oldX && newY < oldY) {
-            return MovementDirection.UP_RIGHT;
-        } else if (newX < oldX && newY > oldY) {
-            return MovementDirection.DOWN_LEFT;
-        } else if (newX < oldX && newY < oldY) {
-            return MovementDirection.UP_LEFT;
-        } else if (newX > oldX) {
-            return MovementDirection.RIGHT;
-        } else if (newX < oldX) {
-            return MovementDirection.LEFT;
-        } else if (newY > oldY) {
-            return MovementDirection.DOWN;
-        } else if (newY < oldY) {
-            return MovementDirection.UP;
-        } else {
-            // Handle cases where there's no clear direction, e.g., no movement or staying in place
-            return null;
-        }
-    }
 
 
     public void moveForward(double deltaTime) {
@@ -125,12 +85,7 @@ public class Lawnmower {
         // Turn the lawnmower
         angle += Math.toRadians(degrees);
     }
-//
-//    public void turnRight(double degrees) {
-//        // Turn the lawnmower 90 degrees to the right
-//        //orientation = (orientation + 1) % 4;
-//        angle += Math.toRadians(degrees);
-//    }
+
     public boolean isAtBoundary() {
 
         int row = (int)Math.round(x);
@@ -160,7 +115,7 @@ public class Lawnmower {
         }
         return false;
     }
-    public boolean hasMowedEntireLawn(){
+    public boolean hasMowedEntireLawn(){ //can use if you want to check when entire lawn is mowed not just 80%
         for (int i = 0; i < lawn.getGridWidth(); i++) {
             for (int j = 0; j < lawn.getGridHeight(); j++) {
                 //if cell is obstacle or wire , ignore
@@ -184,13 +139,6 @@ public class Lawnmower {
         return true;
     }
 
-    public void moveTo(int newX, int newY) {
-        // Move the lawnmower to a specific position
-//        if (!lawn.isObstacle(newX, newY)) {
-//            x = newX;
-//            y = newY;
-//        }
-    }
     public void setNavigationStrategy(NavigationStrategy navigationStrategy) {
         this.navigationStrategy = navigationStrategy;
     }
@@ -200,10 +148,49 @@ public class Lawnmower {
     public  String getNavigationStrategyName() {
         return navigationStrategy.getName();
     }
-//    public void startNavigation() {
-//        if (navigationStrategy != null) {
-//            navigationStrategy.navigate();
-//        }
-//    }
+
 
 }
+//was going to implement charging time
+//    public void setChargingTime(int chargeTime){
+//        this.chargingTime = chargeTime;
+//    }
+//    public int getChargingTime(){
+//        return this.chargingTime ;
+//    }
+//    public void setChargeDuration(int chargeDuration){
+//        this.chargeDuration = chargeDuration;
+//    }
+//    public int getChargeDuration(){
+//        return this.chargeDuration ;
+//    }
+
+
+// had a method to check for which direction mower was facing ,never used
+
+//public enum MovementDirection {
+//    UP, DOWN, LEFT, RIGHT, UP_RIGHT, UP_LEFT, DOWN_RIGHT, DOWN_LEFT
+//}
+//
+//    public MovementDirection getMovementDirection(double oldX, double oldY, double newX, double newY) {
+//        if (newX > oldX && newY > oldY) {
+//            return MovementDirection.DOWN_RIGHT;
+//        } else if (newX > oldX && newY < oldY) {
+//            return MovementDirection.UP_RIGHT;
+//        } else if (newX < oldX && newY > oldY) {
+//            return MovementDirection.DOWN_LEFT;
+//        } else if (newX < oldX && newY < oldY) {
+//            return MovementDirection.UP_LEFT;
+//        } else if (newX > oldX) {
+//            return MovementDirection.RIGHT;
+//        } else if (newX < oldX) {
+//            return MovementDirection.LEFT;
+//        } else if (newY > oldY) {
+//            return MovementDirection.DOWN;
+//        } else if (newY < oldY) {
+//            return MovementDirection.UP;
+//        } else {
+//            // Handle cases where there's no clear direction, e.g., no movement or staying in place
+//            return null;
+//        }
+//    }

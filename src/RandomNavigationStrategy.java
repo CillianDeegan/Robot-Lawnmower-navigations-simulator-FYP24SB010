@@ -1,7 +1,6 @@
 import java.util.Random;
 public class RandomNavigationStrategy implements NavigationStrategy{
     Random random = new Random();
-    Lawnmower.MovementDirection direction;
 
     @Override
     public String getName() {
@@ -24,10 +23,6 @@ public class RandomNavigationStrategy implements NavigationStrategy{
             //dont want to mark the area where the mower is, only where it has passed
 
 
-               double newX = lawnmower.getX();
-               double newY = lawnmower.getY();
-
-              direction = lawnmower.getMovementDirection(oldX,oldY, newX, newY); //can log the direction the lawnmower is facing in the console
                 //System.out.println(direction.toString());
 
         }

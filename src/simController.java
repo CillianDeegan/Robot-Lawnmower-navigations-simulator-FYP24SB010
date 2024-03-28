@@ -54,7 +54,7 @@ public class simController {
 
             while( (getCoverage(uncutcells) <= 80)){
                 long currentTime = System.currentTimeMillis();
-                setSpeed();
+                setSpeed(); //button sets speed of simulation
                 double deltaTime = ((currentTime - startTime) / 1000.0) * SPEED_MULTIPLIER;
                 startTime = currentTime;
 
@@ -67,13 +67,13 @@ public class simController {
                 }
 
                 simulationPanel.repaint();
-                // short delay controlling the simulation speed (optional)
+                // short delay controlling the simulation speed
                 try {
-                    Thread.sleep(1); // Adjust the sleep duration as needed
+                    Thread.sleep(1);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-                if(controlPanel.getQuit()){
+                if(controlPanel.getQuit()){ // if button pressed ,quit simulation
                     try {
                         stopSimulation();
                     } catch (InterruptedException e) {
@@ -82,25 +82,12 @@ public class simController {
                 }
             }
 
-            try {
+            try { // if 80% overage , quit simulation
                 stopSimulation();
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            //lawnPanel.repaint();
-//            if(lawnmower.getNavigationStrategy().isEntireLawnMowed()){
-//                try {
-//                    System.out.println("Stopping Simulation");
-//
-//                    stopSimulation();
-//
-//                } catch (InterruptedException e) {
-//                    e.printStackTrace();
-//                }
-//            }
-            // Pause the simulation for 2 seconds
 
-            // Continue with the simulation logic after the pause
         });
         simulationThread.start();
     }
